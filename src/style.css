@@ -1,0 +1,7 @@
+.container {
+  margin: 0 auto;
+  background-color: bisque; }
+
+.container p {
+  font-size: 20px;
+  text-align: center; }
