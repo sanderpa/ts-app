@@ -1,57 +1,25 @@
-import React, { useEffect, useState } from "react";
-import Card from "./Components/Card";
-import { IToDo, IUser } from "./Types/types";
-import axios from "axios";
-import List from "./Components/List";
-import UserItem from "./Components/UserItem";
-import ToDoItem from "./Components/ToDoItem";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import ToDoPage from "./Components/ToDoPage";
+import UserItemPage from "./Components/UserItemPage";
+import UserPage from "./Components/UserPage";
 
 const App = () => {
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [todos, setTodos] = useState<IToDo[]>([]);
-
-  useEffect(() => {
-    fetchUsers();
-    fetchToDos();
-  }, []);
-
-  async function fetchUsers() {
-    try {
-      const response = await axios.get<IUser[]>(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      setUsers(response.data);
-    } catch (error) {
-      alert(error);
-    }
-  }
-
-  async function fetchToDos() {
-    try {
-      const response = await axios.get<IToDo[]>(
-        "https://jsonplaceholder.typicode.com/todos?_limit=20"
-      );
-      setTodos(response.data);
-    } catch (error) {
-      alert(error);
-    }
-  }
-
   return (
-    <div className="container">
-      <Card width="200px" height="200px">
-        <button>Press ME</button>
-      </Card>
-      <List
-        items={users}
-        renderItem={(user: IUser) => <UserItem key={user.id} user={user} />}
-      />
-      <hr />
-      <List
-        items={todos}
-        renderItem={(todo: IToDo) => <ToDoItem key={todo.id} todo={todo} />}
-      />
-    </div>
+    <BrowserRouter>
+      <div className="container">
+        <NavLink to={"/users"}>Users</NavLink>
+        <NavLink className={"nav"} to={"/todos"}>
+          Deals
+        </NavLink>
+      </div>
+      <div>
+        <Routes>
+          <Route path="/users" element={<UserPage />} />
+          <Route path="/todos" element={<ToDoPage />} />
+          <Route path="/users/:id" element={<UserItemPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 
