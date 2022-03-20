@@ -7,7 +7,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="container">
-        <NavLink to={"/users"}>Users</NavLink>
+        <NavLink className={"nav"} to={"/users"}>
+          Users
+        </NavLink>
         <NavLink className={"nav"} to={"/todos"}>
           Deals
         </NavLink>

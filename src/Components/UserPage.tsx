@@ -4,6 +4,7 @@ import { IUser } from "../Types/types";
 import List from "./List";
 import UserItem from "./UserItem";
 import { useNavigate } from "react-router-dom";
+import Card from "./Card";
 
 const UserPage: FC = () => {
   const [users, setUsers] = useState<IUser[]>([]);
@@ -27,11 +28,13 @@ const UserPage: FC = () => {
     <List
       items={users}
       renderItem={(user: IUser) => (
-        <UserItem
-          onClick={(user) => nav("/users/" + user.id)}
-          user={user}
-          key={user.id}
-        />
+        <Card width={"300px"} height={"300px"}>
+          <UserItem
+            onClick={(user) => nav("/users/" + user.id)}
+            user={user}
+            key={user.id}
+          />
+        </Card>
       )}
     />
   );
